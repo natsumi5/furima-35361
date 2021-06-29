@@ -27,16 +27,16 @@ Things you may want to cover:
 
 ## users テーブル
 
-| Column          | Type   | Options     |
-| --------------- | ------ | ----------- |
-| nickname        | string | null: false |
-| email           | string | null: false |
-| password        | string | null: false |
-| last_name       | string | null: false |
-| first_name      | string | null: false |
-| last_name_kana  | string | null: false |
-| first_name_kana | string | null: false |
-| birthday        | date   | null: false |
+| Column             | Type   | Options                   |
+| ------------------ | ------ | ------------------------- |
+| nickname           | string | null: false               |
+| email              | string | null: false, unique: true |
+| encrypted_password | string | null: false               |
+| last_name          | string | null: false               |
+| first_name         | string | null: false               |
+| last_name_kana     | string | null: false               |
+| first_name_kana    | string | null: false               |
+| birthday           | date   | null: false               |
 
 
 ### Association
@@ -46,28 +46,27 @@ Things you may want to cover:
 
 ## items テーブル
 
-| Column      | Type       | Options                        |
-| ----------- | ---------- | -------------------------------|
-| name        | string     | null: false                    |
-| description | text       | null: false                    |
-| category    | integer    | null: false                    |
-| status      | integer    | null: false                    |
-| price       | integer    | null: false                    |
-| user        | references | null: false, foreign_key: true |
+| Column         | Type       | Options                        |
+| -------------- | ---------- | -------------------------------|
+| name           | string     | null: false                    |
+| description    | text       | null: false                    |
+| category_id    | integer    | null: false                    |
+| status_id      | integer    | null: false                    |
+| burden_id      | integer    | null: false                    |
+| prefectures_id | integer    | null: false                    |
+| days_id        | integer    | null: false                    |
+| price          | integer    | null: false                    |
+| user           | references | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :user
 - has_one    :purchase
-- has_many :messages
 
 ## purchases テーブル
 
 | Column          | Type       | Options                        |
 | --------------- | ---------- | -------------------------------|
-| burden          | integer    | null: false                    |
-| shipment_source | integer    | null: false                    |
-| days            | integer    | null: false                    |
 | user            | references | null: false, foreign_key: true |
 | item            | references | null: false, foreign_key: true |
 
@@ -78,14 +77,15 @@ Things you may want to cover:
 
 ## shipping_addresses テーブル
 
-| Column       | Type       | Options                        |
-| ------------ | ---------- | ------------------------------ |
-| postal_code  | integer    | null: false                    |
-| prefectures  | integer    | null: false                    |
-| address      | text       | null: false                    |
-| phone_number | integer    | null: false                    |
-| user         | references | null: false, foreign_key: true |
-| purchase     | references | null: false, foreign_key: true |
+| Column         | Type       | Options                        |
+| -------------- | ---------- | ------------------------------ |
+| postal_code    | string     | null: false                    |
+| prefectures_id | integer    | null: false                    |
+| address        | string     | null: false                    |
+| address_number | string     | null: false                    |
+| building_name  | string     |                                |
+| phone_number   | string     | null: false                    |
+| purchase       | references | null: false, foreign_key: true |
 
 ### Association
 
