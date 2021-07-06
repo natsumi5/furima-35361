@@ -17,13 +17,13 @@
     <ul class='lists-right'>
       <% if user_signed_in? %>
         <div class="user_nav grid-6">
-          <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-          <%= link_to "投稿する", root_path, class: "post" %>
+          <li><%= link_to current_user.nickname, "#", class: "user-nickname" %></li>
+          <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "logout" %></li>
         </div>
       <% else %>
         <div class="grid-6">
-          <%= link_to "ログイン", new_user_session_path, class: "post" %>
-          <%= link_to "新規登録", new_user_registration_path, class: "post" %>
+          <li><%= link_to "ログイン", new_user_session_path, class: "login" %></li>
+          <li><%= link_to "新規登録", new_user_registration_path, class: "sign-up" %></li>
         </div>
       <% end %>
     </ul>
