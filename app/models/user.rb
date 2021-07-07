@@ -3,7 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  
+
   validates :password, :password_confirmation,
             format: { with: /(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]/, message: '英字と数字の両方（半角）を含めて設定してください。' }
   with_options presence: true do
