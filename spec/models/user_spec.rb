@@ -18,6 +18,7 @@ RSpec.describe User, type: :model do
       it 'last_name_kanaとfirst_name_kanaが全角カタカナであれば登録できる' do
         @user.last_name_kana = 'カタカナ'
         @user.first_name_kana = 'カタカナ'
+        expect(@user).to be_valid
       end
     end
 
@@ -56,8 +57,8 @@ RSpec.describe User, type: :model do
                                                       'Password confirmation 英字と数字の両方（半角）を含めて設定してください。')
       end
       it 'passwordが５文字以下では登録できない' do
-        @user.password = '00000'
-        @user.password_confirmation = '00000'
+        @user.password = 'aa000'
+        @user.password_confirmation = 'aa000'
         @user.valid?
         expect(@user.errors.full_messages).to include('Password is too short (minimum is 6 characters)')
       end
