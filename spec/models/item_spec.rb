@@ -87,15 +87,25 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include('Day to ship must be other than 1')
       end
+      it 'priceが空では登録できない' do
+        @item.price = ''
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price can't be blank")
+      end
+      it 'priceが全角数字では登録できない' do
+        @item.price = '３００'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price 300~9,999,999の半角数字で入力してください")
+      end
       it 'priceが300より小さい場合登録できない' do
         @item.price = 299
         @item.valid?
-        expect(@item.errors.full_messages).to include('Price must be greater than or equal to 300')
+        expect(@item.errors.full_messages).to include("Price 300~9,999,999の半角数字で入力してください")
       end
       it 'priceが9999999より大きい場合登録できない' do
         @item.price = 10_000_000
         @item.valid?
-        expect(@item.errors.full_messages).to include('Price must be less than or equal to 9999999')
+        expect(@item.errors.full_messages).to include("Price 300~9,999,999の半角数字で入力してください")
       end
       it 'user_idが紐づいていない場合登録できない' do
         @item.user = nil

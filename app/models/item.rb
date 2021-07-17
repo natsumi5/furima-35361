@@ -10,8 +10,10 @@ class Item < ApplicationRecord
       validates :prefecture_id
       validates :day_to_ship_id
     end
-    validates :price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 }
+    validates :price
   end
+
+  validates :price, numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999, message: "300~9,999,999の半角数字で入力してください" }
 
   belongs_to :user
   has_one_attached :image
