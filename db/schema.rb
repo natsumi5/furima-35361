@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_10_034651) do
+ActiveRecord::Schema.define(version: 2021_07_25_074328) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -48,19 +48,26 @@ ActiveRecord::Schema.define(version: 2021_07_10_034651) do
     t.index ["user_id"], name: "index_items_on_user_id"
   end
 
-  create_table "products", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "name", null: false
-    t.text "description", null: false
-    t.integer "category_id", null: false
-    t.integer "status_id", null: false
-    t.integer "burden_id", null: false
-    t.integer "prefecture_id", null: false
-    t.integer "day_to_ship_id", null: false
-    t.integer "price", null: false
+  create_table "purchases", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
+    t.bigint "item_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_products_on_user_id"
+    t.index ["item_id"], name: "index_purchases_on_item_id"
+    t.index ["user_id"], name: "index_purchases_on_user_id"
+  end
+
+  create_table "shipping_addresses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "postal_code", null: false
+    t.integer "prefecture_id", null: false
+    t.string "address", null: false
+    t.string "address_number", null: false
+    t.string "building_name"
+    t.string "phone_number", null: false
+    t.bigint "purchase_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["purchase_id"], name: "index_shipping_addresses_on_purchase_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -83,5 +90,7 @@ ActiveRecord::Schema.define(version: 2021_07_10_034651) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "items", "users"
-  add_foreign_key "products", "users"
+  add_foreign_key "purchases", "items"
+  add_foreign_key "purchases", "users"
+  add_foreign_key "shipping_addresses", "purchases"
 end
