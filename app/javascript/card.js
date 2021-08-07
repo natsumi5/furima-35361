@@ -1,5 +1,6 @@
 const pay = () => {
-  Payjp.setPublicKey("pk_test_123b8b1ba0d31f5c6ff860c6");
+  Payjp.setPublicKey(process.env.PAYJP_PUBLIC_KEY);
+ 
   const submit = document.getElementById("button");
   submit.addEventListener("click", (e) => {
     e.preventDefault();
@@ -26,7 +27,6 @@ const pay = () => {
       document.getElementById("card-cvc").removeAttribute("name");
       document.getElementById("card-exp-month").removeAttribute("name");
       document.getElementById("card-exp-year").removeAttribute("name");
-
       document.getElementById("charge-form").submit();
     });
   });
