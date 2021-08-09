@@ -60,6 +60,16 @@ RSpec.describe PurchaseShipping, type: :model do
         @purchase_shipping.valid?
         expect(@purchase_shipping.errors.full_messages).to include('Phone number 半角数字のみで入力してください')
       end
+      it 'phone_numberが9桁以下では購入できない' do
+        @purchase_shipping.phone_number = '123456789'
+        @purchase_shipping.valid?
+        expect(@purchase_shipping.errors.full_messages).to include('Phone number 半角数字のみで入力してください')
+      end
+      it 'phone_numberが12桁以上では購入できない' do
+        @purchase_shipping.phone_number = '123456789012'
+        @purchase_shipping.valid?
+        expect(@purchase_shipping.errors.full_messages).to include('Phone number 半角数字のみで入力してください')
+      end
       it 'user_idが紐づいていない場合は購入できない' do
         @purchase_shipping.user_id = nil
         @purchase_shipping.valid?
