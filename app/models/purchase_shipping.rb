@@ -9,6 +9,8 @@ class PurchaseShipping
     validates :address
     validates :address_number
     validates :phone_number, format: { with: /\A\d{10,11}\z/, message: '半角数字のみで入力してください' }
+    validates :user_id
+    validates :item_id
   end
 
   def save

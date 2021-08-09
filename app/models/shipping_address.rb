@@ -1,5 +1,5 @@
 class ShippingAddress < ApplicationRecord
-  has_one :shipping_addresses
+  belongs_to :purchase
 
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :prefecture
