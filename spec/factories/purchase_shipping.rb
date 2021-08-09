@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :purchase_shipping do
-    token              {"tok_abcdefghijk00000000000000000"}
+    token              { 'tok_abcdefghijk00000000000000000' }
     postal_code        { '000-0000' }
     prefecture_id      { Faker::Number.rand(2..48) }
     address            { '住所001' }

@@ -33,12 +33,12 @@ RSpec.describe PurchaseShipping, type: :model do
       it 'postal_codeに"-"がない場合は購入できない' do
         @purchase_shipping.postal_code = 1111111
         @purchase_shipping.valid?
-        expect(@purchase_shipping.errors.full_messages).to include("Postal code ハイフン(-)を含めた半角数字で入力してください")
+        expect(@purchase_shipping.errors.full_messages).to include('Postal code ハイフン(-)を含めた半角数字で入力してください')
       end
       it 'prefecture_idが1の場合は購入できない' do
         @purchase_shipping.prefecture_id = 1
         @purchase_shipping.valid?
-        expect(@purchase_shipping.errors.full_messages).to include("Prefecture must be other than 1")
+        expect(@purchase_shipping.errors.full_messages).to include('Prefecture must be other than 1')
       end
       it 'addressが空では購入できない' do
         @purchase_shipping.address = ''
