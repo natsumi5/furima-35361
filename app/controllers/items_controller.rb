@@ -1,8 +1,10 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
+  before_action :move_to_index, only: [:show, :edit, :update, :destroy]
   before_action :item_find, only: [:show, :edit, :update, :destroy]
   before_action :redirect_to_index, only: [:edit, :update, :destroy]
   before_action :move_top_page, only: [:edit, :update]
+  
 
   def index
     @items = Item.order(id: 'DESC')
@@ -57,5 +59,9 @@ class ItemsController < ApplicationController
 
   def move_top_page
     redirect_to root_path if Purchase.exists?(item_id: params[:id])
+  end
+
+  def move_to_index
+    redirect_to action: :index unless Item.exists?(id: params[:id])
   end
 end
