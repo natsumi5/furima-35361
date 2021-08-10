@@ -61,7 +61,7 @@ RSpec.describe PurchaseShipping, type: :model do
         expect(@purchase_shipping.errors.full_messages).to include('Phone number 半角数字のみで入力してください')
       end
       it 'phone_numberが半角文字混合では購入できない' do
-        @purchase_shipping.phone_number = '０００11111111'
+        @purchase_shipping.phone_number = '1111111111a'
         @purchase_shipping.valid?
         expect(@purchase_shipping.errors.full_messages).to include('Phone number 半角数字のみで入力してください')
       end
