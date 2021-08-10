@@ -6,6 +6,6 @@ FactoryBot.define do
     address            { '住所001' }
     address_number     { '住所002' }
     building_name      { 'ビルディング1' }
-    phone_number       { 11111111111 }
+    phone_number       { '11111111111' }
   end
 end
